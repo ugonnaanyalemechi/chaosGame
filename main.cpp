@@ -1,23 +1,19 @@
-﻿// -- HEADER FILES -- //
-#include <iostream> // Used to display info and gather keyboard input
+﻿#include <iostream> // Used to display info and gather keyboard input
 #include <iomanip> // Used to manipulate stream contents
 #include <fstream> // Ussed for file-handling
 #include <string> // Used to store messages in string objects
 
 using namespace std;
 
-// -- GLOBAL VARIABLES -- //
 const int MAX_ROWS = 1000;
 const int MAX_COLS = 1000;
 string grid[MAX_ROWS][MAX_COLS];
 
-// -- POINT STRUCTURE -- //
 struct Point {
     int xValue = 0;
     int yValue = 0;
 };
 
-// -- DEBUGGING -- //
 struct Debugging {
     bool showFlow = false;
     bool allowFlowPause = false;
@@ -48,7 +44,6 @@ struct Debugging {
 };
 Debugging debug;
 
-// -- FUNCTION PROTOTYPES -- //
 void welcomeUser();
 void initializeGrid();
 void turnCellOn(Point);
@@ -73,7 +68,6 @@ void promptUserToEnterFileToSave(fstream&);
 void createPPMHeader(fstream&);
 void transferTestDataToFile(fstream&);
 
-// -- FUNCTION DEFINITIONS -- //
 void welcomeUser() {
     cout << "Welcome to the Chaos Game!" << endl;
 }
@@ -245,7 +239,6 @@ void transferTestDataToFile(fstream& outputFile) {
     cout << "\nAll done!" << endl;
 }
 
-// -- MAIN -- //
 int main() {
     srand(time(0)); // Using a fresh seed value based on time is necesssary to provide a fresh new set of random numbers
     int randomXValue = rand() % 500;
