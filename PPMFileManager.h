@@ -14,6 +14,9 @@ private:
 	void ppmOutputColor(fstream&, int, int, int);
 	void createPPMHeader(fstream&);
 	void transferTestDataToFile(fstream&);
+	void getCellOnColorInputFromUser(int&, int&, int&);
+	void getCellOffColorInputFromUser(int&, int&, int&);
+	bool checkIntegerInputForRGB(string);
 public:
 	void transferToFileProcess(fstream&);
 };

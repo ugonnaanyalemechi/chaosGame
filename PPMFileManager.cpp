@@ -1,17 +1,15 @@
 #include <iostream>
+#include <string>
 #include "PPMFileManager.h"
-#include "Debugging.h"
+#include "CoreOperations.h"
 #include "extern.h"
 
 using namespace std;
-
-Debugging debug3;
 
 void PPMFileManager::transferToFileProcess(fstream& outputFile) {
     promptUserToEnterFileToSave(outputFile);
     createPPMHeader(outputFile);
     transferTestDataToFile(outputFile);
-
     outputFile.close();
 }
 
@@ -26,9 +24,8 @@ void PPMFileManager::promptUserToEnterFileToSave(fstream& outputFile) {
 
 string PPMFileManager::enterOutputFileName() {
     string fileName;
-    cout << "Enter here: "; cin.ignore(); getline(cin, fileName);
+    cout << "Enter here: "; getline(cin, fileName);
     fileName = fileName + ".ppm";
-    debug3.show("File name used", fileName);
     return fileName;
 }
 
@@ -58,15 +55,83 @@ void PPMFileManager::createPPMHeader(fstream& outputFile) {
 }
 
 void PPMFileManager::transferTestDataToFile(fstream& outputFile) {
+    int onR, onG, onB, offR, offG, offB;
+
+    getCellOnColorInputFromUser(onR, onG, onB);
+    getCellOffColorInputFromUser(offR, offG, offB);
+
     cout << "\nProcessing...\n";
     for (int i = 0; i < MAX_ROWS; i++) {
         for (int j = 0; j < MAX_COLS; j++) {
             if (grid[i][j] == "X ")
-                ppmOutputColor(outputFile, 0, 0, 0);
+                ppmOutputColor(outputFile, onR, onG, onB);
             else if (grid[i][j] == "  ")
-                ppmOutputColor(outputFile, 255, 255, 255);
+                ppmOutputColor(outputFile, offR, offG, offB);
         }
     }
     cout << "\nAll done!\n";
 }
 
+void PPMFileManager::getCellOnColorInputFromUser(int& onR, int& onG, int& onB) {
+    string onRString, onGString, onBString;
+
+    cout << "\nWhat color would you like for the cells that are on to be displayed as? (RGB format)\n";
+
+    for (int i = 0; i < 3; i++) {
+        bool rgbInputIsValid = false;
+        while (!rgbInputIsValid) {
+            if (i == 0) {
+                cout << "R: "; getline(cin, onRString);
+                rgbInputIsValid = checkIntegerInputForRGB(onRString);
+            }
+            else if (i == 1) {
+                cout << "G: "; getline(cin, onGString);
+                rgbInputIsValid = checkIntegerInputForRGB(onGString);
+            }
+            else {
+                cout << "B: "; getline(cin, onBString);
+                rgbInputIsValid = checkIntegerInputForRGB(onBString);
+            }
+        }
+    }
+    onR = stoi(onRString); onG = stoi(onGString); onB = stoi(onBString);
+}
+
+void PPMFileManager::getCellOffColorInputFromUser(int& offR, int& offG, int& offB) {
+    string offRString, offGString, offBString;
+
+    cout << "\nWhat color would you like for the cells that are off to be displayed as? (RGB format)\n";
+
+    for (int i = 0; i < 3; i++) {
+        bool rgbInputIsValid = false;
+        while (!rgbInputIsValid) {
+            if (i == 0) {
+                cout << "R: "; getline(cin, offRString);
+                rgbInputIsValid = checkIntegerInputForRGB(offRString);
+            }
+            else if (i == 1) {
+                cout << "G: "; getline(cin, offGString);
+                rgbInputIsValid = checkIntegerInputForRGB(offGString);
+            }
+            else {
+                cout << "B: "; getline(cin, offBString);
+                rgbInputIsValid = checkIntegerInputForRGB(offBString);
+            }
+        }
+    }
+    offR = stoi(offRString); offG = stoi(offGString); offB = stoi(offBString);
+}
+
+bool PPMFileManager::checkIntegerInputForRGB(string input) {
+    CoreOperations coreOps2;
+    if (!coreOps2.checkInputIsEmpty(input))
+        return false;
+    if (!coreOps2.checkInputIsInteger(input))
+        return false;
+    if (stoi(input) > 255) {
+        cout << "\nInvalid input!\n";
+        cout << "Choose a number between 0-256\n";
+        return false;
+    }
+    return true;
+}

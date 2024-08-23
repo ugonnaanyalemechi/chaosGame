@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "Point.h"
 
 using std::string;
 
@@ -8,10 +7,10 @@ class Setup
 {
 private:
 	void initializeGrid();
-	void promptUserToSelectTestOptions(Point);
+	void promptUserToSelectTestOptions();
 	void showUserTestOptions();
 	string enterTestOption();
-	void processTestOptionsSelected(string, Point);
+	void processTestOptionsSelected(string);
 public:
-	void startUpProcess(Point);
+	void startUpProcess();
 };
