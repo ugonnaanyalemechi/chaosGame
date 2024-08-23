@@ -1,3 +1,4 @@
 out/
 .vs/
-*.json
+Debugging.cpp
+Debugging.h

@@ -4,7 +4,6 @@ project (chaosGame)
 
 set(SOURCE_FILES
 	main.cpp
-	Debugging.cpp
 	Setup.cpp
 	CoreOperations.cpp
 	PPMFileManager.cpp
