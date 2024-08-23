@@ -12,11 +12,13 @@ The chaos game first involves using a polygon — let's say an isosceles triangl
 Below is an example of the above situation simulated using this project over the course of 1,000,000 iterations:
 
 ![Screenshot 2024-08-23 143111](https://github.com/user-attachments/assets/37799bbe-36f1-45c0-9502-17a6129ea3db)
+
 *The Sierpiński Triangle*
 
 Other polygons can be used to create different fractals, as shown below:
 
 ![Screenshot 2024-08-23 144450](https://github.com/user-attachments/assets/0eba7bce-3988-4ecd-8f9b-107fb8858a88)
+
 *Hexagonal fractal, created using this project*
 
 
