@@ -59,7 +59,6 @@ void PPMFileManager::transferTestDataToFile(fstream& outputFile) {
 
     getCellOnColorInputFromUser(onR, onG, onB);
     getCellOffColorInputFromUser(offR, offG, offB);
-
     cout << "\nProcessing...\n";
     for (int i = 0; i < MAX_ROWS; i++) {
         for (int j = 0; j < MAX_COLS; j++) {

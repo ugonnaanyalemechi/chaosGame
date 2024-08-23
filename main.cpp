@@ -1,4 +1,4 @@
-﻿#include <fstream>
+#include <fstream>
 #include "Setup.h"
 #include "PPMFileManager.h"
 #include "extern.h"
